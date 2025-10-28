@@ -1,8 +1,6 @@
 name: backend-deploy
 
 on:
-  push:
-    branches: ["master"]
   workflow_dispatch:
 
 permissions:
@@ -66,6 +64,12 @@ jobs:
           done
 
           echo "All parameters set successfully."
+
+      - name: Install AWS Copilot CLI
+        run: |
+          sudo curl -Lo /usr/local/bin/copilot https://github.com/aws/copilot-cli/releases/latest/download/copilot-linux
+          sudo chmod +x /usr/local/bin/copilot
+          copilot --version
 
       - name: Initialize services
         working-directory: ./copilot
